@@ -23,6 +23,11 @@ module Rbase
       client.createTable(table_name, column_families)
     end
     
+    def delete_table(table_name)
+      @client.disableTable(table_name)
+      @client.deleteTable(table_name)
+    end
+    
     def [](table_name)
       table_name = table_name.to_sym
       @tables[table_name] ||= Rbase::Table.new(client, table_name)

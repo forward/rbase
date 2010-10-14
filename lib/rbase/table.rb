@@ -25,10 +25,5 @@ module Rbase
         @client.mutateRow(@table_name,row,mutations)
       end
     end
-    
-    def delete
-      @client.disableTable(@table_name)
-      @client.deleteTable(@table_name)
-    end
   end
 end
