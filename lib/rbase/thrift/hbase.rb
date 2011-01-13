@@ -2043,9 +2043,8 @@ require File.join(File.dirname(__FILE__), 'hbase_types')
                               IO => {:type => ::Thrift::Types::STRUCT, :name => 'io', :class => Apache::Hadoop::Hbase::Thrift::IOError}
                             }
 
-                            def struct_fields; FIELDS; __END__
+                            def struct_fields; FIELDS; end
                             
-
                             def validate
                             end
 
@@ -2309,4 +2308,3 @@ require File.join(File.dirname(__FILE__), 'hbase_types')
                     end
                   end
                 end
-              end

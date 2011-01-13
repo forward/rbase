@@ -16,6 +16,10 @@ module Rbase
       client.getTableNames
     end
     
+    def table_exists?(table_name)
+      table_names.include?(table_name)
+    end
+    
     def create_table(table_name, *column_family_names)
       column_families = column_family_names.map do |family_name|
         Apache::Hadoop::Hbase::Thrift::ColumnDescriptor.new(:name => family_name)
