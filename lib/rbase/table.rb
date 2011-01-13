@@ -24,6 +24,18 @@ module Rbase
     end
     alias_method :[]=, :insert
     
+    def multi_insert(rows)
+      row_mutations = rows.map do |row, hash|
+        hash.map do |family,value|
+          mutations = value.map do |column,val|
+            Apache::Hadoop::Hbase::Thrift::Mutation.new(:column => "#{family}:#{column}", :value => val)
+          end
+          Apache::Hadoop::Hbase::Thrift::BatchMutation.new(:row => row, :mutations => mutations)
+        end
+      end
+      @client.mutateRows(@table_name, row_mutations.flatten)
+    end
+    
     def each_batch(batch_size=100, columns=[])
       columns = [columns] unless columns.is_a?(Array)
       scanner_id = @client.scannerOpen(@table_name, '', columns)

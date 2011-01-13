@@ -14,8 +14,17 @@ client = Rbase::Client.new("hbase-master.hadoop.forward.co.uk")
 #   end
 # }
 
+client['andy_keywords'].multi_insert({
+  'toni' => {
+    'metadata' => {'language' => 'italian'}
+  },
+  'andy' => {
+    'metadata' => {'language' => 'english'}
+  },
+})
 
-puts client['andy_keywords']['accu chec'].inspect
-client['andy_keywords'].each do |result|
-  puts result.inspect
-end
+puts client['andy_keywords']['toni'].inspect
+puts client['andy_keywords']['andy'].inspect
+# client['andy_keywords'].each do |result|
+#   puts result.inspect
+# end
