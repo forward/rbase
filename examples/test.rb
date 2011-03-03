@@ -22,9 +22,13 @@ client['andy_keywords'].multi_insert({
     'metadata' => {'language' => 'english'}
   },
 })
+client['andy_keywords'].insert('abs', {
+  'metadata' => {'language' => 'british'}
+})
 
 puts client['andy_keywords']['toni'].inspect
 puts client['andy_keywords']['andy'].inspect
+puts client['andy_keywords']['abs'].inspect
 # client['andy_keywords'].each do |result|
 #   puts result.inspect
 # end
