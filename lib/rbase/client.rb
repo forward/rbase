@@ -5,8 +5,8 @@ module Rbase
       yield client if block_given?
     end
     
-    def initialize(server, port=9090)
-      socket = Thrift::Socket.new(server, port.to_s)
+    def initialize(server, port=9090, timeout=60)
+      socket = Thrift::Socket.new(server, port.to_s, timeout)
       transport = Thrift::BufferedTransport.new(socket)
       transport.open
 
