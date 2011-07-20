@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "forward-rbase"
-  s.version = "0.2.4"
+  s.version = "0.2.5"
   s.authors = ["Forward Internet Group"]
   s.date = %q{2011-02-17}
   s.description = "Simple lib for executing hbase lookups"
@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
     "lib/rbase/thrift/hbase.rb",
     "lib/rbase/thrift/hbase_constants.rb",
     "lib/rbase/thrift/hbase_types.rb",
+    "lib/rbase/thrift/hbase_extension.rb"
   ]
   s.homepage = %q{http://github.com/forward/rbase}
   s.require_paths = ["lib"]
