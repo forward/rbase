@@ -4,16 +4,16 @@ module Rbase
       @client = client
       @table_name = table_name.to_s
     end
-    
+
     def find(row)
       @client.getRow(@table_name,row).map { |row| row_to_hash(row) }
     end
-    
+
     def first(row)
       find(row).first
     end
     alias_method :[], :first
-    
+
     def insert(row, hash)
       hash.each do |family,value|
         mutations = value.map do |column,val|
@@ -23,7 +23,7 @@ module Rbase
       end
     end
     alias_method :[]=, :insert
-    
+
     def multi_insert(rows)
       row_mutations = rows.map do |row, hash|
         hash.map do |family,value|
@@ -35,7 +35,7 @@ module Rbase
       end
       @client.mutateRows(@table_name, row_mutations.flatten)
     end
-    
+
     def each_batch(batch_size=100, columns=[])
       columns = [columns] unless columns.is_a?(Array)
       scanner_id = @client.scannerOpen(@table_name, '', columns)
@@ -46,7 +46,7 @@ module Rbase
       end
       @client.scannerClose(scanner_id)
     end
-    
+
     def each(batch_size=100, columns=[])
       each_batch(batch_size, columns) do |results|
         results.each do |result|
@@ -54,9 +54,17 @@ module Rbase
         end
       end
     end
+
+    def set_auto_flush(enabled)
+      @client.setAutoFlush(@table_name, enabled)
+    end
     
+    def increment(row, family, column, value)
+      @client.atomicIncrement(@table_name, row, "#{family}:#{column}", value)
+    end
+
     private
-    
+
     def row_to_hash(row)
       ret_val = {}
       row.columns.each do |column,val|

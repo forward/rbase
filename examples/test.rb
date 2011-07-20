@@ -29,6 +29,25 @@ client['andy_keywords'].insert('abs', {
 puts client['andy_keywords']['toni'].inspect
 puts client['andy_keywords']['andy'].inspect
 puts client['andy_keywords']['abs'].inspect
+
+# incrementing
+client.create_table!("horaci_test", "metadata")
+
+client['horaci_test'].insert('horaci', {
+  'metadata' => {'language' => 'spanish', 'age' => [33].pack("Q").reverse}
+})
+
+# Column initialized
+new_age = client['horaci_test'].increment('horaci', 'metadata', 'age', 1)
+
+# Column not initialized
+wrinkles = client['horaci_test'].increment('horaci', 'metadata', 'wrinkles', 8)
+
+puts "New age: #{new_age}"
+puts "Wrinkles: #{wrinkles}"
+puts "Row: " + client['horaci_test']['horaci'].inspect
+puts "unpacked wrinkles: " + client['horaci_test']['horaci']["metadata"]["wrinkles"].reverse.unpack("Q").first.to_s
+
 # client['andy_keywords'].each do |result|
 #   puts result.inspect
 # end
