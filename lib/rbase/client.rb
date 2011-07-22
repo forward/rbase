@@ -44,7 +44,9 @@ module Rbase
     end
     
     def [](table_name)
-      @tables[table_name] ||= Rbase::Table.new(@client, table_name) if table_exists?(table_name)
+      @tables[table_name] ||= begin
+        Rbase::Table.new(@client, table_name) if table_exists?(table_name)
+      end
       @tables[table_name]
     end
   end

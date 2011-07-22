@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "forward-rbase"
-  s.version = "0.2.5"
+  s.version = "0.2.6"
   s.authors = ["Forward Internet Group"]
   s.date = %q{2011-02-17}
   s.description = "Simple lib for executing hbase lookups"
