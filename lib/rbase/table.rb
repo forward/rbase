@@ -68,7 +68,7 @@ module Rbase
     def row_to_hash(row)
       ret_val = {}
       row.columns.each do |column,val|
-        family, key = *column.split(":")
+        family, key = *column.split(":", 2)
         ret_val[family] ||= {}
         ret_val[family][key] = val.value
       end
